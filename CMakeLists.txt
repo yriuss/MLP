@@ -24,7 +24,7 @@ ${CUDA_INCLUDE_DIRS}
 )
 
 check_language(CUDA)
-if(CMAKE_CUDA_COMPILER)
+if(0)
 enable_language(CUDA)
 
 set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)

@@ -166,29 +166,29 @@ MLP/teste.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MLP.dir/build.make CMakeFiles/MLP.dir/MLP/teste.cc.s
 .PHONY : MLP/teste.cc.s
 
-main.o: main.cu.o
+main.o: main.cc.o
 .PHONY : main.o
 
 # target to build an object file
-main.cu.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/main.cu.o
-.PHONY : main.cu.o
+main.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/main.cc.o
+.PHONY : main.cc.o
 
-main.i: main.cu.i
+main.i: main.cc.i
 .PHONY : main.i
 
 # target to preprocess a source file
-main.cu.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/main.cu.i
-.PHONY : main.cu.i
+main.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/main.cc.i
+.PHONY : main.cc.i
 
-main.s: main.cu.s
+main.s: main.cc.s
 .PHONY : main.s
 
 # target to generate assembly for a file
-main.cu.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/main.cu.s
-.PHONY : main.cu.s
+main.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/main.cc.s
+.PHONY : main.cc.s
 
 # Help Target
 help:

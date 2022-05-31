@@ -29,8 +29,8 @@ Eigen::MatrixXd generate_points(uint n_samples){
     //generate random Matrix
     std::random_device rseed;
 	std::mt19937 rng(rseed());
-	std::uniform_real_distribution<> dist{0,1};
-    std::normal_distribution<> n_dist{0,1};
+	std::uniform_real_distribution<> dist{0,2};
+    std::normal_distribution<> n_dist{0,2};
     
     Eigen::MatrixXd x(n_samples, 3);
 
@@ -84,19 +84,17 @@ Eigen::MatrixXd Linear::b(){
 }
 
 Linear::Linear(uint d_in, uint d_out){
-    
     std::random_device rseed;
 	std::mt19937 rng(rseed());
 	std::normal_distribution<> dist{0,std::sqrt(2./d_in)};
     //std::cout << d_in << " " << d_out << std::endl;
-    _W.resize(d_in, d_out);
-    _b.resize(1, d_out);
-
-    for(int j = 0; j < d_out; j++){
-		for(int i = 0; i < d_in ; i++){
+    _W.resize(d_out, d_in);
+    _b.resize(d_out, 1);
+    for(int i = 0; i < d_out; i++){
+		for(int j = 0; j < d_in ; j++){
 			_W(i,j) = dist(rng);
 		}
-        _b(j) = dist(rng);
+        _b(i) = dist(rng);
 	}
     //std::cout << "W is :" <<std::endl;
     //std::cout << W << std::endl;
@@ -113,7 +111,7 @@ void Linear::get_parameters(){
 }
 
 Eigen::MatrixXd Linear::forward(Eigen::MatrixXd x){
-    return x*_W + _b;
+    return x*_W.transpose() + _b.transpose();
 }
 
 
@@ -130,14 +128,24 @@ public:
     Eigen::MatrixXd b(uint i);
     void set_W(Eigen::MatrixXd x, uint layer);
     void set_b(Eigen::MatrixXd x, uint layer);
+    Eigen::MatrixXd input();
 private:
     std::vector<Linear> li;
     std::vector<Eigen::MatrixXd> _n;
     std::vector<int> activations;
+    Eigen::MatrixXd _input;
 };
+
+
+Eigen::MatrixXd NN::input(){
+    return _input;
+}
 
 void NN::set_W(Eigen::MatrixXd x, uint layer){
     li[layer].set_W(x);
+    //if(layer == 1){
+    //    std::cout << x.cols() << " " << x.rows() << std::endl;
+    //}
 }
 
 void NN::set_b(Eigen::MatrixXd x, uint layer){
@@ -148,11 +156,13 @@ uint NN::nlayers(){
     return li.size() - 1;
 }
 
+
 NN::NN(uint input_size, uint output_size, std::vector<uint> n_nodes, uint n_hidden_layers, std::vector<int> activations){
     li.reserve(n_hidden_layers + 1);
     this->activations = activations;
     for(int i = 0; i < n_hidden_layers + 1 ; i++){
         if(i > 0 && i < n_hidden_layers){
+            //std::cout << "passei aqui" << std::endl;
             li.emplace_back(Linear(n_nodes[i - 1], n_nodes[i]));
         }
         else{
@@ -185,11 +195,20 @@ Eigen::MatrixXd drelu(Eigen::MatrixXd x){
     return x;
 }
 
+Eigen::MatrixXd dlinear(Eigen::MatrixXd x){
+    for(int i =0; i < x.size(); i++){
+        x(i) = 1;
+    }
+    return x;
+}
+
 Eigen::MatrixXd NN::forward(Eigen::MatrixXd x){
     _n.reserve(li.size());
+    _input = x;
+    //std::cout << li.size() << std::endl;exit(-1);
     for(int i = 0; i < li.size(); i++){
         x = li[i].forward(x);
-        _n[i] = x;
+        _n.emplace_back(x);
         if(activations[i] == RELU){
             x = relu(x);
         }else{
@@ -236,7 +255,7 @@ Eigen::MatrixXd Loss::dLoss_db(uint i){
 
 void Loss::backward(NN& nn){
     uint M = nn.nlayers();
-    Eigen::MatrixXd dummy;
+    Eigen::MatrixXd dummy(1,1);
     if(s.size() < M + 1){
         s.reserve(M + 1);
         _dLoss_dW.reserve(M+1);
@@ -247,12 +266,24 @@ void Loss::backward(NN& nn){
             _dLoss_dW.emplace_back(dummy);
         }
     }
-
-    Eigen::MatrixXd F = drelu(nn.n(M)).array().matrix().asDiagonal();
-    
+    //std::cout << M << std::endl; exit(-1);
+    //std::cout << dlinear(nn.n(M-1)).array().matrix().asDiagonal().rows() << " " << dlinear(nn.n(M-1)).array().matrix().asDiagonal().cols() << std::endl;
+    Eigen::MatrixXd F(nn.n(M-1).size(), nn.n(M-1).size());
+    F.setZero();
+    Eigen::MatrixXd aux;
+    if(LINEAR == LINEAR){
+        //std::cout << dlinear(nn.n(M-1)).asDiagonal() <<std::endl;
+        aux = dlinear(nn.n(M-1));
+        for(int i = 0; i < aux.size(); i++)
+            F(i,i) = aux(i);
+    }else{
+        F = drelu(nn.n(M-1)).array().matrix().asDiagonal();
+    }
     s[M] = dloss;
     
-    _dLoss_dW[M] = s[M];
+    _dLoss_dW[M] = s[M]*drelu(nn.n(M-1));
+    
+    //std::cout << _dLoss_dW[M] << std::endl;
     _dLoss_db[M] = s[M];
     
     //std::cout << nn.n(M) << std::endl;
@@ -267,10 +298,24 @@ void Loss::backward(NN& nn){
         _dLoss_dW[m - 1] = s[m - 1]*drelu(nn.n(m - 2)).transpose();
         _dLoss_db[m - 1] = s[m - 1];
     }
-    F = drelu(nn.n(0)).array().matrix().asDiagonal();
-    s[0] = F*nn.W(1)*s[1];
-    _dLoss_dW[0] = s[0];
+    aux = dlinear(nn.n(0));
+    F.resize(nn.n(0).size(), nn.n(0).size());
+    F.setZero();
+    for(int i = 0; i < aux.size(); i++)
+        F(i,i) = aux(i);
+    s[0] = F*nn.W(1).transpose()*s[1];
+    //std::cout << nn.W(1).cols() << " " << nn.W(1).rows() <<std::endl;
+    //std::cout << s[1].cols() << " " << s[1].rows() <<std::endl;
+    //std::cout << F.cols() << " " << F.rows() << std::endl;
+    //std::cout << s[0].cols() << " " << s[0].rows() << std::endl;exit(-1);
+    //std::cout << s[0]<<std::endl;
+    _dLoss_dW[0] = s[0]*nn.input();
     _dLoss_db[0] = s[0];
+    //std::cout << nn.input().cols() << " " << nn.input().rows() << std::endl; 
+    //std::cout << s[0].cols() << " " << s[0].rows() <<std::endl;
+    //std::cout << dlinear(nn.n(0)).transpose().cols() << " " << dlinear(nn.n(0)).transpose().rows() <<std::endl;
+    //std::cout << _dLoss_dW[0].cols() << " " << _dLoss_dW[0].rows() << std::endl;
+    //std::cout << _dLoss_db[0].cols() << " " << _dLoss_db[0].rows() << std::endl;exit(-1);
 
 }
 
@@ -299,12 +344,21 @@ void Optimizer::step(NN& nn){
     for(int i = 0; i < nn.nlayers() + 1; i++){
         //applying step
         new_W = nn.W(i)- _lr*_loss->dLoss_dW(i);
+        //std::cout << _loss->dLoss_dW(i) << std::endl;exit(-1);
         new_b = nn.b(i)- _lr*_loss->dLoss_db(i);
-        
+        //if(i==1){
+        //    std::cout << nn.W(i).cols() << " " << nn.W(i).rows() <<std::endl;
+        //    std::cout << _loss->dLoss_dW(i).cols() << " " << _loss->dLoss_dW(i).rows() <<std::endl;
+        //    std::cout << new_W.cols() << " " << new_W.rows() << std::endl;
+        //}
+        //std::cout << nn.W(i).cols() << " " << nn.W(i).rows() <<std::endl;
+        //std::cout << _loss->dLoss_dW(i).cols() << " " << _loss->dLoss_dW(i).rows() <<std::endl;
+        //std::cout << new_W.cols() << " " << new_W.rows() << std::endl;
         //update weights and biases
+        
         nn.set_W(new_W, i);
-        nn.set_W(new_b, i);
-    }
+        nn.set_b(new_b, i);
+    }//exit(-1);
 }
 
 class C1{
@@ -398,6 +452,11 @@ int main(){
     //Eigen::MatrixXd m(3,3);
     //m =  v.array().matrix().asDiagonal();
     //std::cout << v.transpose()*m << std::endl;
+
+
+
+
+
 #define N_SAMPLES 100
     Eigen::MatrixXd data;
 
@@ -409,7 +468,7 @@ int main(){
         X_train.col(i) = data.col(i);
     }
     //std::cout << X_train << std::endl;
-#define N_EPOCHS 100
+#define N_EPOCHS 200
     uint input_size = 2;
     uint output_size = 1;
     std::vector<uint> n_nodes;
@@ -428,21 +487,25 @@ int main(){
 
     std::vector<double> vloss;
 
-    vloss.reserve(N_EPOCHS);
+    vloss.reserve(N_EPOCHS+1);
     for(int epoch = 0; epoch < N_EPOCHS; epoch++){
         for(int i = 0; i < N_SAMPLES; i++){
             y_pred = nn.forward(X_train.row(i));
-            
+            //std::cout << "passei" << std::endl;
             loss += loss_func.compute(y_train.row(i), y_pred);
+            //std::cout << "passei" << std::cout;
             //std::cout << loss << std::endl; exit(-1);
             loss_func.backward(nn);
+            //std::cout << "passei" << std::endl;
             optimizer.step(nn);
+            //std::cout << "passei" << std::endl;
         }
-        std::cout << "loss in epoch " << epoch << " is: " << loss/N_SAMPLES << std::endl;
-        vloss.emplace_back(loss/N_SAMPLES);
+        std::cout << "loss in epoch " << epoch + 1 << " is: " << loss/N_SAMPLES << std::endl;
+        vloss.emplace_back((double)loss/N_SAMPLES);
         loss = 0;
     }
+    //std::cout << "mas auqqedaskfhj" << std::endl;
     plot_data(vloss);
-
+    
     return 0;
 }

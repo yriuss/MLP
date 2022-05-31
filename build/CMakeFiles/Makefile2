@@ -109,12 +109,12 @@ CMakeFiles/MLP.dir/clean:
 CMakeFiles/teste.dir/all: CMakeFiles/MLP.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/teste.dir/build.make CMakeFiles/teste.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=3,4,5 "Built target teste"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=3,4 "Built target teste"
 .PHONY : CMakeFiles/teste.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/teste.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" 5
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/teste.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" 0
 .PHONY : CMakeFiles/teste.dir/rule

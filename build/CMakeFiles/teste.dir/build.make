@@ -69,113 +69,28 @@ include CMakeFiles/teste.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/teste.dir/flags.make
 
-CMakeFiles/teste.dir/main.cu.o: CMakeFiles/teste.dir/flags.make
-CMakeFiles/teste.dir/main.cu.o: ../main.cu
-CMakeFiles/teste.dir/main.cu.o: CMakeFiles/teste.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/teste.dir/main.cu.o"
-	/usr/local/cuda-11.2/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -MD -MT CMakeFiles/teste.dir/main.cu.o -MF CMakeFiles/teste.dir/main.cu.o.d -x cu -dc "/home/adriel/Documents/Redes Neurais/MLP/main.cu" -o CMakeFiles/teste.dir/main.cu.o
+CMakeFiles/teste.dir/main.cc.o: CMakeFiles/teste.dir/flags.make
+CMakeFiles/teste.dir/main.cc.o: ../main.cc
+CMakeFiles/teste.dir/main.cc.o: CMakeFiles/teste.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/teste.dir/main.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/teste.dir/main.cc.o -MF CMakeFiles/teste.dir/main.cc.o.d -o CMakeFiles/teste.dir/main.cc.o -c "/home/adriel/Documents/Redes Neurais/MLP/main.cc"
 
-CMakeFiles/teste.dir/main.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/teste.dir/main.cu.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
+CMakeFiles/teste.dir/main.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/teste.dir/main.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/adriel/Documents/Redes Neurais/MLP/main.cc" > CMakeFiles/teste.dir/main.cc.i
 
-CMakeFiles/teste.dir/main.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/teste.dir/main.cu.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
+CMakeFiles/teste.dir/main.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/teste.dir/main.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/adriel/Documents/Redes Neurais/MLP/main.cc" -o CMakeFiles/teste.dir/main.cc.s
 
 # Object files for target teste
 teste_OBJECTS = \
-"CMakeFiles/teste.dir/main.cu.o"
+"CMakeFiles/teste.dir/main.cc.o"
 
 # External object files for target teste
 teste_EXTERNAL_OBJECTS =
 
-CMakeFiles/teste.dir/cmake_device_link.o: CMakeFiles/teste.dir/main.cu.o
-CMakeFiles/teste.dir/cmake_device_link.o: CMakeFiles/teste.dir/build.make
-CMakeFiles/teste.dir/cmake_device_link.o: ../lib/libMLP.so
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_gapi.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_stitching.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_alphamat.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_aruco.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_bgsegm.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_bioinspired.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_ccalib.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudabgsegm.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudafeatures2d.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudaobjdetect.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudastereo.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_dnn_objdetect.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_dnn_superres.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_dpm.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_face.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_freetype.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_fuzzy.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_hdf.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_hfs.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_img_hash.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_intensity_transform.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_line_descriptor.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_mcc.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_quality.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_rapid.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_reg.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_rgbd.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_saliency.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_sfm.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_stereo.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_structured_light.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_phase_unwrapping.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_superres.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_surface_matching.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_tracking.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_highgui.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_datasets.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_plot.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_text.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_videostab.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_videoio.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudaoptflow.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudalegacy.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudawarping.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_optflow.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_wechat_qrcode.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_xfeatures2d.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_ml.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_shape.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_ximgproc.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_video.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_dnn.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_xobjdetect.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_imgcodecs.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_objdetect.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_calib3d.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_features2d.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_flann.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_xphoto.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_photo.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudaimgproc.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudafilters.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_imgproc.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudaarithm.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_core.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/local/lib/libopencv_cudev.so.4.5.2
-CMakeFiles/teste.dir/cmake_device_link.o: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-CMakeFiles/teste.dir/cmake_device_link.o: CMakeFiles/teste.dir/dlink.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CUDA device code CMakeFiles/teste.dir/cmake_device_link.o"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/teste.dir/dlink.txt --verbose=$(VERBOSE)
-
-# Rule to build all files generated by this target.
-CMakeFiles/teste.dir/build: CMakeFiles/teste.dir/cmake_device_link.o
-.PHONY : CMakeFiles/teste.dir/build
-
-# Object files for target teste
-teste_OBJECTS = \
-"CMakeFiles/teste.dir/main.cu.o"
-
-# External object files for target teste
-teste_EXTERNAL_OBJECTS =
-
-teste: CMakeFiles/teste.dir/main.cu.o
+teste: CMakeFiles/teste.dir/main.cc.o
 teste: CMakeFiles/teste.dir/build.make
 teste: ../lib/libMLP.so
 teste: /usr/local/lib/libopencv_gapi.so.4.5.2
@@ -245,9 +160,8 @@ teste: /usr/local/lib/libopencv_cudaarithm.so.4.5.2
 teste: /usr/local/lib/libopencv_core.so.4.5.2
 teste: /usr/local/lib/libopencv_cudev.so.4.5.2
 teste: /usr/lib/x86_64-linux-gnu/libpython3.8.so
-teste: CMakeFiles/teste.dir/cmake_device_link.o
 teste: CMakeFiles/teste.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CUDA executable teste"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable teste"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/teste.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
