@@ -1,2 +1,0 @@
-/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles/CheckCUDA/CMakeFiles/edit_cache.dir
-/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles/CheckCUDA/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,0 @@
-/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles/MLP.dir
-/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles/teste.dir
-/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles/edit_cache.dir
-/home/adriel/Documents/Redes Neurais/MLP/build/CMakeFiles/rebuild_cache.dir
